@@ -1,0 +1,73 @@
+Data Wrangling, 
+I Perform the following operations using Python on any open source dataset (e.g., data.csv) 
+	1. Import all the required Python Libraries.
+ 	2. Locate an open source data from the web (e.g., https://www.kaggle.com). Provide a clear description of the data and its source  
+	3. Load the Dataset into pandas dataframe. 
+	4. Data Preprocessing: check for missing values in the data using pandas isnull(), describe() function to get some initial statistics. Provide variable 		descriptions. Types of variables etc. Check the dimensions of the data frame. 
+	5. Data Formatting and Data Normalization: Summarize the types of variables by checking the data types (i.e., character, numeric, integer, factor, and 		logical) of the variables in the data set. If variables are not in the correct data type, apply proper type conversions. 
+	6. Turn categorical variables into quantitative variables in Python. In addition to the codes and outputs, explain every operation that you do in the 		above steps and explain everything that you do to import/read/scrape the data set.
+
+
+import numpy as np
+import pandas as pd
+
+data=pd.read_csv("IRIS.csv")
+data
+
+data.shape
+
+data.info()
+
+data.describe()
+
+data.index
+
+data.columns
+
+data[0:3]
+
+data.iloc[1]
+
+data.iloc[:3:]
+
+data.iloc[0:4:2]
+
+data.isnull()
+
+data.isnull().any()
+
+data.isnull().sum()
+
+# Data normalization
+before=type(data.sepal_length[0])
+before
+
+data.sepal_length=data.sepal_length.astype('int64')
+after=type(data.sepal_length[0])
+after
+
+data.info()
+
+#Change categorial value in quantity variable
+df=pd.DataFrame(data)
+df['species'].replace(['Iris-setosa','Iris-virginica'],[0,2],inplace=True)
+data
+
+==============================================================================
+import pandas as pd
+# import numpy as np
+# import matplotlib.pyplot as plt
+# import seaborn as sb
+# df=pd.read_csv("IRIS.csv")
+# df
+# df.isnull().sum()
+# df.dtypes
+# df.info()
+# df.describe()
+# df.head()
+# df.tail()
+# df['sepal_length']
+# df.iloc[10]
+# df.shape
+# df['species'].replace(['Iris-setosa'],[0],inplace=True)
+# df

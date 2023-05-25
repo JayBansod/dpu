@@ -1,0 +1,50 @@
+Data Wrangling II 
+Create an “Academic performance” dataset of students and perform the following operations using Python. 
+	1. Scan all variables for missing values and inconsistencies. If there are missing values and/or inconsistencies, use any of the suitable techniques to 		deal with them. 
+	2. Scan all numeric variables for outliers. If there are outliers, use any of the suitable techniques to deal with them. 
+	3. Apply data transformations on at least one of the variables. The purpose of this transformation should be one of the following reasons: to change the 		scale for better understanding of the variable, to convert a non-linear relation into a linear one, or to decrease the skewness and convert the 		distribution into a normal distribution. Reason and document your approach properly.
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df=pd.read_csv("IRIS2.csv")
+df
+
+df.isnull().sum()
+
+ndf=df
+# ndf['sepal_length']=ndf['sepal_length'].fillna(ndf['sepal_length'].mean())
+ndf=ndf.fillna(ndf.mean(numeric_only=True))
+ndf
+
+df.boxplot(column="sepal_length")
+plt.show()
+
+col=['sepal_length','petal_length']
+df.boxplot(col)
+plt.show()
+
+#removal of outlier
+Q1=df['sepal_length'].quantile(0.25)
+Q3=df['sepal_length'].quantile(0.75)
+IQR=Q3-Q1
+print("IQR:",IQR)
+print("shape before ",df.shape)
+
+df=df[~((df['sepal_length']<(Q1-IQR*1.5))|(df['sepal_length']>(Q3+1.5*IQR)))]
+print("shape after ",df.shape)
+
+df.boxplot(['sepal_length','petal_length'])
+plt.show()
+
+x=df.sepal_length
+y=df.petal_length
+plt.plot(x,y)
+plt.show()
+
+plt.bar(x,y)
+plt.show()
+
+==============================================================
